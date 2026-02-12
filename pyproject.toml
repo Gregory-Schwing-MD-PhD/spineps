@@ -21,7 +21,7 @@ spineps_ = 'spineps.entrypoint:entrypoint_no_checks'
 # Python version matches Docker base image (pytorch/pytorch:2.1.0-cuda12.1-cudnn8-runtime)
 python = "^3.10"
 
-# CRITICAL: Pin torch to match the base image - prevents "Double Torch" bloat
+# CRITICAL: Pin torch to match base image - prevents "Double Torch" bloat
 # These are already installed in the base image, so pip will skip them
 torch = "2.1.0"
 torchvision = "0.16.0"
@@ -41,7 +41,11 @@ nnunetv2 = "^2.4.2"
 TPTBox = "^0.4.0"
 antspyx = "0.4.2"
 rich = "^13.6.0"
-monai = "^1.3.0"
+
+# CRITICAL FIX: Use monai 1.2.0 which is compatible with torch 2.1.0
+# monai>=1.3.0 requires torch>=2.4.1 which would cause conflicts
+monai = "~1.2.0"
+
 acvl-utils = "0.2"
 TypeSaveArgParse = "^1.0.1"
 
